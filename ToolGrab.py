@@ -74,16 +74,16 @@ for file_name in args.files:
 
             # Download specified file(s)
             for asset in assets:
-                # deepcode ignore reDOS: <please specify a reason of ignoring this>
                 if re.match(filename.replace('*', '.*'), asset['name']):
                     download_url = asset['browser_download_url']
                     print(f"\n{gray}Downloading {filename}...{reset}")
                     download_response = requests.get(download_url)
+                    
                     if download_response.status_code ==200:
-                        # deepcode ignore PT: <please specify a reason of ignoring this>
                         with open(output_filename, 'wb') as file:
                             file.write(download_response.content)
                         print(f"{green}{filename}{reset} downloaded successfully")
+                        
                         # Decompress if it's a .gz file
                         if output_filename.endswith('.gz'):
                             decomp_filename = output_filename.replace('.gz', '')
